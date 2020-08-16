@@ -1098,9 +1098,7 @@ export class ModeHandler implements vscode.Disposable {
           break;
 
         case 'macro':
-          let recordedMacro = (await Register.getByKey(transformation.register))
-            .text as RecordedState;
-
+          let recordedMacro = (await Register.get(vimState, transformation.register)).text;
           if (!(recordedMacro instanceof RecordedState)) {
             return vimState;
           }
