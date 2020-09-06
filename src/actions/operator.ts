@@ -411,7 +411,16 @@ export class FormatOperator extends BaseOperator {
   public async run(vimState: VimState, start: Position, end: Position): Promise<VimState> {
     // = operates on complete lines
     vimState.editor.selection = new vscode.Selection(start.getLineBegin(), end.getLineEnd());
-    await vscode.commands.executeCommand('editor.action.formatSelection');
+    switch (vimState.editor.document.languageId) {
+      case 'json':
+      case 'jsonc':
+      case 'rust':
+        await vscode.commands.executeCommand('editor.action.reindentselectedlines');
+        break;
+      default:
+        await vscode.commands.executeCommand('editor.action.formatSelection');
+        break;
+    }
     let line = vimState.cursorStartPosition.line;
 
     if (vimState.cursorStartPosition.isAfter(vimState.cursorStopPosition)) {
