@@ -527,7 +527,7 @@ abstract class CommandEditorScroll extends BaseCommand {
 
 @RegisterAction
 class CommandCtrlE extends CommandEditorScroll {
-  keys = ['<C-e>'];
+  keys = ['<C-d>'];
   preservesDesiredColumn() {
     return true;
   }
@@ -629,7 +629,7 @@ class CommandMoveFullPageDown extends CommandScrollAndMoveCursor {
 
 @RegisterAction
 class CommandMoveHalfPageDown extends CommandScrollAndMoveCursor {
-  keys = ['<C-d>'];
+  keys = ['<C-e>'];
   to: EditorScrollDirection = 'down';
 
   protected getNumLines(vimState: VimState) {
